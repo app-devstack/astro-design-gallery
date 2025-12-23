@@ -1,0 +1,26 @@
+---
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{title}</title>
+     <meta name="description" content="An Astro project.">
+  </head>
+  <body>
+    <nav>
+      <a href="#">Home</a>
+    </nav>
+    <h1>{title}</h1>
+    <article>
+      <slot />
+    </article>
+  </body>
+  <style>
+    h1 {
+      font-size: 2rem;
+    }
+  </style>
+</html>

@@ -1,8 +1,12 @@
 ---
 import WorksPage from '@/features/works/WorksPage.astro';
 import Layout from '@/layouts/Layout.astro';
+import AppHeader from '@shared/components/elements/header/AppHeader.astro';
 
 const pageTitle = 'デザインギャラリー';
 ---
 
-<Layout title={pageTitle}><WorksPage /></Layout>
+<Layout title={pageTitle}>
+  <AppHeader />
+  <WorksPage />
+</Layout>

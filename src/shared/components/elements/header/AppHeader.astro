@@ -1,0 +1,52 @@
+---
+const TITLE = 'Marumaru Studio';
+---
+
+<header id="app-header" class="sticky top-0 z-50 bg-white shadow transition-shadow">
+  <div id="header-content" class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+    <h1 id="header-title" class="text-3xl font-bold text-gray-900">{TITLE}</h1>
+  </div>
+</header>
+
+<script>
+  import {
+    animateElements,
+    HEADER_SCROLLED_STYLE,
+    HEADER_TOP_STYLE,
+  } from '@shared/components/elements/header/utils';
+
+  const appHeader = document.getElementById('app-header');
+  const headerContent = document.getElementById('header-content');
+  const headerTitle = document.getElementById('header-title');
+
+  if (!appHeader || !headerContent || !headerTitle) {
+    console.error('Header elements not found');
+    throw new Error('Required header elements are missing');
+  }
+
+  let isScrolled = false;
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+
+    if (scrollY > 0 && !isScrolled) {
+      isScrolled = true;
+      animateElements([
+        { element: appHeader, styles: HEADER_SCROLLED_STYLE.header },
+        { element: headerContent, styles: HEADER_SCROLLED_STYLE.content },
+        { element: headerTitle, styles: HEADER_SCROLLED_STYLE.title },
+      ]);
+
+      return;
+    }
+
+    if (scrollY === 0 && isScrolled) {
+      isScrolled = false;
+      animateElements([
+        { element: appHeader, styles: HEADER_TOP_STYLE.header },
+        { element: headerContent, styles: HEADER_TOP_STYLE.content },
+        { element: headerTitle, styles: HEADER_TOP_STYLE.title },
+      ]);
+    }
+  });
+</script>

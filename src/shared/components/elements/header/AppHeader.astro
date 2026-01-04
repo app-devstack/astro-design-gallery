@@ -1,8 +1,14 @@
 ---
-const TITLE = 'Marumaru Studio';
+import { Font } from 'astro:assets';
+const TITLE = 'maru-maruuu | Studio';
 ---
 
-<header id="app-header" class="sticky top-0 z-50 bg-white shadow transition-shadow">
+<Font cssVariable="--font-montserrat-alternates" preload />
+
+<header
+  id="app-header"
+  class="font-montserrat-alternates sticky top-0 z-50 bg-white shadow transition-shadow"
+>
   <div id="header-content" class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
     <h1 id="header-title" class="text-3xl font-bold text-gray-900">{TITLE}</h1>
   </div>
@@ -50,3 +56,9 @@ const TITLE = 'Marumaru Studio';
     }
   });
 </script>
+
+<style>
+  .font-montserrat-alternates {
+    font-family: var(--font-montserrat-alternates);
+  }
+</style>

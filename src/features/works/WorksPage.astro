@@ -1,0 +1,23 @@
+---
+import { worksService } from '@/shared/service/worksService';
+import WorkItem from '@/features/works/components/workItem.astro';
+
+// 作品一覧取得
+const works = await worksService.getWorks();
+---
+
+<main class="min-h-screen bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- 作品一覧 -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {works.map((work) => <WorkItem work={work} />)}
+    </div>
+
+    <!-- 作品数表示 -->
+    {
+      works.length > 0 && (
+        <div class="mt-8 text-center text-sm text-gray-600">{works.length}件の作品を表示中</div>
+      )
+    }
+  </div>
+</main>

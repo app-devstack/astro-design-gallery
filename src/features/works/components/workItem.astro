@@ -1,0 +1,74 @@
+---
+import type { AppWorkType } from '@/shared/types';
+
+interface Props {
+  work: AppWorkType;
+}
+
+const { work } = Astro.props;
+
+// 画像は配列の最初のみを使用
+const imageUrl = work.imageUrl[0] || '';
+
+// 作品詳細ページのURL生成
+const workUrl = `/works/${work.id}`;
+---
+
+<div class="flex flex-col w-full gap-2">
+  <!-- 画像 -->
+  <div class="bg-blue-100/30 p-10">
+    <div class="w-full h-full flex items-center justify-center">
+      <a href={workUrl}>
+        <img
+          width={work.width || 304}
+          height={work.height || 380}
+          src={imageUrl}
+          class="block max-w-full max-h-full w-auto h-auto"
+          alt={work.title}
+          decoding="async"
+        />
+      </a>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-2 px-10">
+    <!-- カテゴリ -->
+    <!-- {
+      category && (
+        <p class="flex flex-wrap gap-1 m-0">
+          <a href={`/category/${category.slug}`} class="no-underline">
+            {category.name}
+          </a>
+        </p>
+      )
+    } -->
+
+    <!-- タグ -->
+    {
+      work.tags?.length > 0 && (
+        <p class="flex flex-wrap gap-4 text-xs/normal">
+          {work.tags.map((tag) => (
+            <a
+              href={`/tag/${tag.slug}`}
+              class="before:content-['#'] before:text-[0.95em] before:mr-[0.06em]"
+            >
+              {tag.name}
+            </a>
+          ))}
+        </p>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  img {
+    --image_max_width: 100%;
+    --image_max_height: 100%;
+    flex: none;
+    max-width: var(--image_max_width);
+    max-height: var(--image_max_height);
+    background: #fff;
+    box-shadow: 10px 16px 14px -7px rgba(0, 0, 128, 0.2);
+  }
+</style>

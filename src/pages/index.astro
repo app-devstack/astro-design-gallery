@@ -1,7 +1,8 @@
 ---
-import RootLayout from "@/layouts/root-layout.astro";
+import WorksPage from '@/features/works/WorksPage.astro';
+import Layout from '@/layouts/Layout.astro';
+
+const pageTitle = 'デザインギャラリー';
 ---
 
-<RootLayout title="Home Page">
-  <p class="bg-red-500">My page content, wrapped in a layout!</p>
-</RootLayout>
+<Layout title={pageTitle}><WorksPage /></Layout>

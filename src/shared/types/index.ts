@@ -29,11 +29,20 @@ export interface WorkType {
   title: string;
   description: string | null;
   imageUrl: string[];
-  categoryId: string;
   shape: string | null;
   width: number | null;
   height: number | null;
   isPublished: number;
   createdAt: Date;
   updatedAt: Date;
+
+  categoryId: string;
+}
+
+/**
+ * 作品型
+ */
+export interface AppWorkType extends WorkType {
+  category: CategoryType;
+  tags: TagType[];
 }

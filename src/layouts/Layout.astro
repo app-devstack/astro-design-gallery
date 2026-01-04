@@ -14,6 +14,14 @@ const { title = 'Marumaru Studio', description = '作品ギャラリーサイト
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+
+    <script is:inline>
+      const theme =
+        localStorage.getItem('theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.classList[theme === 'dark' ? 'add' : 'remove']('dark');
+    </script>
+
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

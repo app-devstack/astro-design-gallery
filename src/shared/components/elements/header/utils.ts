@@ -5,8 +5,6 @@ import { gsap } from 'gsap';
  */
 export const HEADER_SCROLLED_STYLE = {
   header: {
-    // 背景完全透過
-    backgroundColor: 'rgba(255, 255, 255, 0)',
     boxShadow: 'none',
   },
   content: {
@@ -23,8 +21,6 @@ export const HEADER_SCROLLED_STYLE = {
  */
 export const HEADER_TOP_STYLE = {
   header: {
-    // 背景不透明
-    backgroundColor: 'rgba(255, 255, 255, 1)',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
   },
   content: {

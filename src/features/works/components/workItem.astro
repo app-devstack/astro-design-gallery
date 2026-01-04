@@ -1,5 +1,6 @@
 ---
 import type { AppWorkType } from '@/shared/types';
+import Image from 'astro/components/Image.astro';
 
 interface Props {
   work: AppWorkType;
@@ -19,7 +20,7 @@ const workUrl = `/works/${work.id}`;
   <div class="bg-blue-100/30 p-10">
     <div class="w-full h-full flex items-center justify-center">
       <a href={workUrl}>
-        <img
+        <Image
           width={work.width || 304}
           height={work.height || 380}
           src={imageUrl}

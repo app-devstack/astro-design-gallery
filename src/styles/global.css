@@ -121,36 +121,12 @@
 
 @layer base {
   * {
-    /* @apply border-border outline-ring/50; */
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-@theme {
-  /* --color-base: #ffffff;
-  --color-text: #333333;
-  --color-accent: #ff6b6b; */
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  /* font-family: 'Noto Sans JP', sans-serif; */
-  /* color: var(--color-text); */
-  /* background-color: var(--color-base); */
-}
-
-@layer base {
-  * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+  }
+  a {
+    @apply text-inherit no-underline;
   }
 }

@@ -1,6 +1,7 @@
 ---
 import { Font } from 'astro:assets';
 import ThemeToggle from '@shared/components/elements/ThemeToggle.astro';
+import { cn } from '@/shared/lib/utils';
 const TITLE = 'maru-maruuu | Studio';
 ---
 
@@ -17,7 +18,11 @@ const TITLE = 'maru-maruuu | Studio';
 <!-- スクロール用ヘッダー -->
 <header
   id="app-header-scroll"
-  class="font-montserrat-alternates fixed top-0 z-50 bg-transparent opacity-0 pointer-events-none -translate-y-5 cursor-pointer"
+  class={cn(
+    'font-montserrat-alternates',
+    'fixed top-0 z-50 w-full pointer-events-none -translate-y-5 cursor-pointer',
+    'bg-transparent opacity-0'
+  )}
 >
   <div
     id="header-content"
@@ -29,30 +34,27 @@ const TITLE = 'maru-maruuu | Studio';
 </header>
 
 <script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
   import { showScrollHeader, hideScrollHeader } from '@shared/components/elements/header/utils';
 
+  // ScrollTriggerプラグインを登録
+  gsap.registerPlugin(ScrollTrigger);
+
+  const topHeader = document.getElementById('app-header-top');
   const scrollHeader = document.getElementById('app-header-scroll');
 
-  if (!scrollHeader) {
-    console.error('Scroll header not found');
-    throw new Error('Required scroll header is missing');
+  if (!topHeader || !scrollHeader) {
+    console.error('Header elements not found');
+    throw new Error('Required header elements are missing');
   }
 
-  let isScrolled = false;
-
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-
-    if (scrollY > 0 && !isScrolled) {
-      isScrolled = true;
-      showScrollHeader(scrollHeader);
-      return;
-    }
-
-    if (scrollY === 0 && isScrolled) {
-      isScrolled = false;
-      hideScrollHeader(scrollHeader);
-    }
+  // 通常ヘッダーが画面外に出たらスクロールヘッダーを表示
+  ScrollTrigger.create({
+    trigger: topHeader,
+    start: 'bottom top', // 通常ヘッダーの下端が画面上端に達したら開始
+    onEnter: () => showScrollHeader(scrollHeader),
+    onLeaveBack: () => hideScrollHeader(scrollHeader),
   });
 
   // ヘッダークリックでトップへスクロール

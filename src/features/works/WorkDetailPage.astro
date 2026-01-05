@@ -1,0 +1,116 @@
+---
+import type { AppWorkType } from '@shared/types';
+import Image from 'astro/components/Image.astro';
+
+interface Props {
+  work: AppWorkType;
+}
+
+const { work } = Astro.props;
+---
+
+<main class="py-8 min-h-[calc(100vh-80px)]">
+  <div class="max-w-300 mx-auto px-4">
+    <div class="work-detail__content">
+      <div
+        class="flex items-center justify-center h-155 bg-muted rounded-lg px-4 py-10 overflow-hidden"
+      >
+        <Image
+          src={work.imageUrl[0]}
+          alt={work.title}
+          inferSize={true}
+          class="rounded-sm"
+          decoding="async"
+        />
+      </div>
+
+      <div class="flex flex-col gap-8">
+        <h1 class="text-4xl font-bold m-0 text-foreground">{work.title}</h1>
+
+        <div class="flex flex-col gap-3 p-6 bg-card rounded-lg border border-border">
+          <div class="flex gap-2">
+            <span class="font-semibold text-muted-foreground min-w-25">カテゴリー:</span>
+            <span class="text-foreground">{work.category.name}</span>
+          </div>
+
+          <div class="flex gap-2">
+            <span class="font-semibold text-muted-foreground min-w-25">サイズ:</span>
+            <span class="text-foreground">{work.width} × {work.height}px ({work.shape})</span>
+          </div>
+
+          <div class="flex gap-2">
+            <span class="font-semibold text-muted-foreground min-w-25">作成日:</span>
+            <span class="text-foreground">{work.createdAt.toLocaleDateString('ja-JP')}</span>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="font-semibold mb-4 text-foreground">説明</h2>
+          <p class="leading-relaxed text-muted-foreground">{work.description}</p>
+        </div>
+
+        {
+          work.tags && work.tags.length > 0 && (
+            <div>
+              <h3 class="font-semibold mb-4 text-foreground">タグ</h3>
+              <div class="flex flex-wrap gap-2">
+                {work.tags.map((tag) => (
+                  <span class="inline-block py-2 px-4 bg-accent text-accent-foreground rounded-full text-sm font-medium">
+                    {tag.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )
+        }
+
+        <div class="flex gap-4 pt-8">
+          <a
+            href="/"
+            class="inline-block py-3 px-6 rounded-lg no-underline font-semibold text-center transition-all duration-300 bg-card text-foreground border-2 border-border hover:bg-muted hover:-translate-y-0.5"
+          >
+            作品一覧に戻る
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<style scoped>
+  .work-detail__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .work-detail__content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  img {
+    --image_max_width: 100%;
+    --image_max_height: 100%;
+
+    width: auto;
+    height: auto;
+    max-width: var(--image_max_width);
+    max-height: var(--image_max_height);
+    box-shadow: 10px 16px 14px -7px rgba(0, 0, 128, 0.2);
+
+    object-fit: contain;
+
+    /* hover */
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  img:hover {
+    transform: translateY(-4px);
+    box-shadow: 12px 20px 18px -8px rgba(0, 0, 128, 0.3);
+  }
+</style>

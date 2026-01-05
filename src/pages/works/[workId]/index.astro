@@ -1,0 +1,25 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import AppHeader from '@shared/components/elements/header/AppHeader.astro';
+import WorkDetailPage from '@/features/works/WorkDetailPage.astro';
+import { worksService } from '@shared/service/worksService';
+
+export async function getStaticPaths() {
+  const workIds = await worksService.getWorkIds();
+  return workIds.map((workId) => ({ params: { workId } }));
+}
+
+const { workId } = Astro.params;
+const work = await worksService.getWorkById(workId);
+
+if (!work) {
+  return Astro.redirect('/404');
+}
+
+const pageTitle = `${work.title} | デザインギャラリー`;
+---
+
+<Layout title={pageTitle}>
+  <AppHeader />
+  <WorkDetailPage work={work} />
+</Layout>

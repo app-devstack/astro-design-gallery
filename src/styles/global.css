@@ -129,4 +129,7 @@
   a {
     @apply text-inherit no-underline;
   }
+  button {
+    @apply cursor-pointer;
+  }
 }

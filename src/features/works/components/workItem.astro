@@ -17,14 +17,14 @@ const workUrl = `/works/${work.id}`;
 
 <div class="flex flex-col w-full gap-2">
   <!-- 画像 -->
-  <div class="bg-blue-100/30 p-10">
+  <div class="bg-blue-100/30 p-10 rounded-sm">
     <div class="w-full h-full flex items-center justify-center">
       <a href={workUrl}>
         <Image
           width={work.width || 304}
           height={work.height || 380}
           src={imageUrl}
-          class="block max-w-full max-h-full w-auto h-auto"
+          class="block max-w-full max-h-full w-auto h-auto rounded-xs"
           alt={work.title}
           decoding="async"
         />
@@ -62,7 +62,7 @@ const workUrl = `/works/${work.id}`;
   </div>
 </div>
 
-<style>
+<style scoped>
   img {
     --image_max_width: 100%;
     --image_max_height: 100%;
@@ -71,5 +71,14 @@ const workUrl = `/works/${work.id}`;
     max-height: var(--image_max_height);
     background: #fff;
     box-shadow: 10px 16px 14px -7px rgba(0, 0, 128, 0.2);
+
+    /* hover */
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  img:hover {
+    transform: translateY(-4px);
+    box-shadow: 12px 20px 18px -8px rgba(0, 0, 128, 0.3);
   }
 </style>

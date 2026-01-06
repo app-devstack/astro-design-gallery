@@ -15,24 +15,23 @@ const imageUrl = work.imageUrl[0] || '';
 const workUrl = `/works/${work.id}`;
 ---
 
-<div class="flex flex-col w-full gap-2">
-  <!-- 画像 -->
-  <div class="bg-blue-100/30 p-10 rounded-sm">
-    <div class="w-full h-full flex items-center justify-center">
-      <a href={workUrl}>
-        <Image
-          width={work.width || 304}
-          height={work.height || 380}
-          src={imageUrl}
-          class="block max-w-full max-h-full w-auto h-auto rounded-xs"
-          alt={work.title}
-          decoding="async"
-        />
-      </a>
-    </div>
+<div class="flex flex-col gap-2">
+   <!-- 画像 -->
+  <div class="bg-muted p-8 rounded-sm">
+    <a href={workUrl} class="block">
+      <Image
+        width={work.width || 304}
+        height={work.height || 380}
+        src={imageUrl}
+        class="w-full h-auto aspect-[5/7] object-cover rounded-sm"
+        alt={work.title}
+        decoding="async"
+      />
+    </a>
   </div>
 
-  <div class="flex flex-col gap-2 px-10">
+
+  <div class="flex flex-col gap-1 px-2">
     <!-- カテゴリ -->
     <!-- {
       category && (
@@ -44,14 +43,18 @@ const workUrl = `/works/${work.id}`;
       )
     } -->
 
+  <div class="space-y-1">
+     <!-- タイトル -->
+     <h3 class="font-medium text-sm text-foreground truncate">{work.title}</h3>
+
     <!-- タグ -->
     {
       work.tags?.length > 0 && (
-        <p class="flex flex-wrap gap-4 text-xs/normal">
+        <p class="flex flex-wrap gap-2 text-[10px] tracking-wide text-muted-foreground">
           {work.tags.map((tag) => (
             <a
               href={`/tag/${tag.slug}`}
-              class="before:content-['#'] before:text-[0.95em] before:mr-[0.06em]"
+              class="before:content-['#'] hover:text-foreground transition-colors"
             >
               {tag.name}
             </a>

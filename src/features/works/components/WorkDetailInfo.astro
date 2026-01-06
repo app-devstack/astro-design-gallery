@@ -1,0 +1,50 @@
+---
+import type { AppWorkType } from '@shared/types';
+import CustomTable from '@shared/components/elements/table/CustomTable.astro';
+import CustomTableRow from '@shared/components/elements/table/CustomTableRow.astro';
+
+interface Props {
+  work: AppWorkType;
+}
+
+const { work } = Astro.props;
+---
+
+<div class="flex flex-col gap-8">
+  <div>
+    <h1 class="text-2xl font-medium tracking-wide text-foreground mb-6">
+      {work.title}
+    </h1>
+    <p class="text-sm leading-relaxed text-muted-foreground mb-8">
+      {work.description}
+    </p>
+  </div>
+
+  <CustomTable>
+    <CustomTableRow label="カテゴリー">
+      <span
+        class="inline-block px-3 py-1 bg-primary-muted rounded-sm text-xs text-foreground border border-border"
+      >
+        {work.category.name}
+      </span>
+    </CustomTableRow>
+
+    <CustomTableRow label="タグ">
+      <div class="flex flex-wrap gap-2">
+        {
+          work.tags.map((tag) => (
+            <span class="inline-block px-3 py-1 bg-background rounded-sm text-xs text-muted-foreground border border-border hover:border-foreground/50 transition-colors">
+              # {tag.name}
+            </span>
+          ))
+        }
+      </div>
+    </CustomTableRow>
+
+    <CustomTableRow label="サイズ">
+      <span class="text-sm text-foreground">
+        {work.width} × {work.height}px ({work.shape})
+      </span>
+    </CustomTableRow>
+  </CustomTable>
+</div>

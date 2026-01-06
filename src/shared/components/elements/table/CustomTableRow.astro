@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'tr'> {
+  label: string;
+}
+
+const { label, class: className, ...rest } = Astro.props;
+---
+
+<tr class:list={['border-b border-border', className]} {...rest}>
+  <td class="py-4 pr-4 text-xs font-bold text-muted-foreground align-baseline w-24">
+    {label}
+  </td>
+  <td class="py-4 align-baseline">
+    <slot />
+  </td>
+</tr>

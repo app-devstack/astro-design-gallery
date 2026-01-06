@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'table'> {}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<table class:list={['w-full border-t border-border', className]} {...rest}>
+  <tbody>
+    <slot />
+  </tbody>
+</table>

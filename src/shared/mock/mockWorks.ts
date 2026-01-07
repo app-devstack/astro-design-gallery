@@ -11,7 +11,7 @@ import { mockTags } from '@shared/mock/mockTags';
 export const mockWorks: AppWorkType[] = [
   {
     id: '019b871c-0a41-770c-b818-77e68767c52e',
-    title: 'サンプル作品1',
+    title: 'SNOW CAT',
     description: 'サンプル作品の説明文です。',
     imageUrl: ['/works/neko_daruma.png'],
     categoryId: mockCategories[0].id,
@@ -27,7 +27,7 @@ export const mockWorks: AppWorkType[] = [
   },
   {
     id: '019b87f4-e642-766e-ac7b-cf8eb64c055c',
-    title: 'サンプル作品2',
+    title: 'WHITE GHOST',
     description: 'サンプル作品の説明文です。',
     imageUrl: ['/works/yuki_ghost.png'],
     categoryId: mockCategories[0].id,
@@ -43,7 +43,7 @@ export const mockWorks: AppWorkType[] = [
   },
   {
     id: '019b87f4-e643-75bf-ac1a-4a53bb0c57e7',
-    title: 'Astro Design Gallery',
+    title: 'ゆずねこ',
     description: 'サンプル作品の説明文です。',
     imageUrl: ['/works/yuzu_neko.png'],
     categoryId: mockCategories[0].id,

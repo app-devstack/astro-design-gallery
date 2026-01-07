@@ -1,6 +1,6 @@
 ---
 import type { AppWorkType } from '@/shared/types';
-import Image from 'astro/components/Image.astro';
+import PolaroidCard from '@/shared/components/elements/PolaroidCard.astro';
 
 interface Props {
   work: AppWorkType;
@@ -15,73 +15,31 @@ const imageUrl = work.imageUrl[0] || '';
 const workUrl = `/works/${work.id}`;
 ---
 
-<div class="flex flex-col gap-2">
-  <!-- 画像 -->
-  <div class="bg-primary-muted p-8 rounded-sm">
-    <a href={workUrl} class="block">
-      <Image
-        width={work.width || 304}
-        height={work.height || 380}
-        src={imageUrl}
-        class="w-full h-auto aspect-5/7 object-cover rounded-sm"
-        alt={work.title}
-        decoding="async"
-      />
-    </a>
-  </div>
+<div class="bg-primary-muted p-6 sm:p-8 rounded-sm h-full space-y-6 flex flex-col items-center">
+  <PolaroidCard
+    href={workUrl}
+    src={imageUrl}
+    alt={work.title}
+    title={work.title}
+    width={work.width || 400}
+    height={work.height || 480}
+  />
 
-  <div class="flex flex-col gap-1 px-2">
-    <!-- カテゴリ -->
-    <!-- {
-      category && (
-        <p class="flex flex-wrap gap-1 m-0">
-          <a href={`/category/${category.slug}`} class="no-underline">
-            {category.name}
+  <!-- タグ -->
+  {
+    work.tags?.length > 0 && (
+      <p class="flex flex-wrap justify-center gap-2 text-[10px]" role="list" aria-label="タグ一覧">
+        {work.tags.map((tag) => (
+          <a
+            href={`/works?tag=${tag.slug}`}
+            class="text-muted-foreground/80 hover:text-foreground transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-1"
+            role="listitem"
+            aria-label={`${tag.name}でフィルター`}
+          >
+            #{tag.name}
           </a>
-        </p>
-      )
-    } -->
-
-    <div class="space-y-1">
-      <!-- タイトル -->
-      <h3 class="font-medium text-sm text-foreground truncate">{work.title}</h3>
-
-      <!-- タグ -->
-      {
-        work.tags?.length > 0 && (
-          <p class="flex flex-wrap gap-2 text-[10px] tracking-wide text-muted-foreground">
-            {work.tags.map((tag) => (
-              <a
-                href={`/tag/${tag.slug}`}
-                class="before:content-['#'] hover:text-foreground transition-colors"
-              >
-                {tag.name}
-              </a>
-            ))}
-          </p>
-        )
-      }
-    </div>
-  </div>
+        ))}
+      </p>
+    )
+  }
 </div>
-
-<style scoped>
-  img {
-    --image_max_width: 100%;
-    --image_max_height: 100%;
-    flex: none;
-    max-width: var(--image_max_width);
-    max-height: var(--image_max_height);
-    background: #fff;
-    box-shadow: 10px 16px 14px -7px rgba(0, 0, 128, 0.2);
-
-    /* hover */
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
-  }
-  img:hover {
-    transform: translateY(-4px);
-    box-shadow: 12px 20px 18px -8px rgba(0, 0, 128, 0.3);
-  }
-</style>
